@@ -38,9 +38,14 @@ app.on('ready', createWindow)
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
+  console.log(`EVENT window-all-closed`)
   // On macOS it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== 'darwin') app.quit()
+
+  console.log(`- restarting...`)
+  app.relaunch({ args: process.argv.slice(1).concat('--relaunch') })
+  app.quit()
 })
 
 app.on('activate', function () {
